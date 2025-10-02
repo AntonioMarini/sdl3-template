@@ -6,17 +6,17 @@
       "hidden": true,
       "generator": "Ninja",
       "cacheVariables": {
-        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake"
-        ,"CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/vcpkg/scripts/buildsystems/vcpkg.cmake",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
       }
     },
     {
-      "name":"linux-debug",
-      "inherits":"base",
+      "name": "linux-debug",
+      "inherits": "base",
       "binaryDir": "${sourceDir}/build",
-      "cacheVariables" : {
+      "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "VCPKG_TARGET_TRIPLET":"x64-linux"
+        "VCPKG_TARGET_TRIPLET": "x64-linux"
       }
     },
     {
@@ -25,7 +25,8 @@
       "binaryDir": "${sourceDir}/build",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "VCPKG_TARGET_TRIPLET": "arm64-osx"
+        "VCPKG_TARGET_TRIPLET": "arm64-osx",
+        "CMAKE_OSX_DEPLOYMENT_TARGET": "15.0"
       }
     },
     {
@@ -39,8 +40,17 @@
     }
   ],
   "buildPresets": [
-    {"name":"build-linux", "configurePreset": "linux-debug"},
-    { "name": "build-macos", "configurePreset": "macos-debug" },
-    { "name": "build-windows", "configurePreset": "windows-debug" }
+    {
+      "name": "build-linux",
+      "configurePreset": "linux-debug"
+    },
+    {
+      "name": "build-macos",
+      "configurePreset": "macos-debug"
+    },
+    {
+      "name": "build-windows",
+      "configurePreset": "windows-debug"
+    }
   ]
 }

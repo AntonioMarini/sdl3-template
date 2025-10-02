@@ -19,18 +19,24 @@ int main() {
     return 1;
   }
 
-  SDL_Window *win = nullptr;
-  SDL_Renderer *ren = nullptr;
-  if (!SDL_CreateWindowAndRenderer("SDL3 Template", 800, 600, 0, &win, &ren)) {
-    SDL_Log("CreateWindowAndRenderer failed: %s", SDL_GetError());
-    return 1;
+  SDL_Window *win;
+  SDL_Renderer *ren;
+  SDL_CreateWindowAndRenderer("SDL3 Template", 800, 600, 0, &win, &ren);
+  SDL_ShowWindow(win);
+  SDL_RaiseWindow(win);
+
+  bool running = true;
+  while (running) {
+    SDL_Event e;
+    while (SDL_PollEvent(&e)) {
+      if (e.type == SDL_EVENT_QUIT || e.type == SDL_EVENT_KEY_DOWN)
+        running = false;
+    }
+    SDL_SetRenderDrawColor(ren, 20, 20, 25, 255);
+    SDL_RenderClear(ren);
+    SDL_RenderPresent(ren);
+    SDL_Delay(16);
   }
-
-  SDL_SetRenderDrawColor(ren, 20, 20, 25, 255);
-  SDL_RenderClear(ren);
-  SDL_RenderPresent(ren);
-
-  SDL_Delay(2000); // minimal proof of life
 
   if (ren)
     SDL_DestroyRenderer(ren);
